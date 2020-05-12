@@ -41,7 +41,7 @@ module FilterFu
 
       def build_anonymous_scope(scope, arg)
         return none() unless column_names.include?(scope.to_s) && !arg.blank?
-        where(scope)
+        lambda { where(scope) }
       end
 
       def protected?(scope)

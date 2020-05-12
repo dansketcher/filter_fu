@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = "filter_fu"
-  s.version       = "0.6.7"
+  s.version       = "0.6.8"
   s.platform      = Gem::Platform::RUBY
   s.authors       = ["Benedikt Deicke"]
   s.email         = ["benedikt@synatic.net"]
