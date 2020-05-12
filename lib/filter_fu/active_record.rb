@@ -32,16 +32,16 @@ module FilterFu
           if memo.respond_to?(scope)
             memo.send(scope, arg)
           else
-            build_anonymous_scope(scope, arg)
+            build_anonymous_scope(memo, scope, arg)
           end
         end || none()
       end
 
       private
 
-      def build_anonymous_scope(scope, arg)
+      def build_anonymous_scope(memo, scope, arg)
         return none() unless column_names.include?(scope.to_s) && !arg.blank?
-        lambda { where(scope, arg) }
+        memo.where(scope, arg)
       end
 
       def protected?(scope)
