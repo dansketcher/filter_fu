@@ -25,6 +25,7 @@ module FilterFu
 
       def filtered_by(filter)
         return none() if !filter || filter.empty?
+        puts "************ #{filter.inspect}"
 
         filter.inject(self) do |memo, (scope, arg)|
           scope = scope.to_sym
