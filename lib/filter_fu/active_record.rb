@@ -29,6 +29,7 @@ module FilterFu
 
         filter.inject(self) do |memo, (scope, arg)|
           scope = scope.to_sym
+          puts "************ scope #{scope.inspect}"
           next if protected?(scope)
           if memo.respond_to?(scope)
             memo.send(scope, arg)
