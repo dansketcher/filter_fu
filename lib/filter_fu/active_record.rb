@@ -25,16 +25,14 @@ module FilterFu
 
       def filtered_by(filter)
         return none() if !filter || filter.empty?
-        puts "************ #{filter.inspect}"
 
         filter.inject(self) do |memo, (scope, arg)|
           scope = scope.to_sym
-          puts "************ scope #{scope.inspect}"
           next if protected?(scope)
           if memo.respond_to?(scope)
             memo.send(scope, arg)
           else
-            memo.send(build_anonymous_scope(scope, arg))
+            build_anonymous_scope(scope, arg)
           end
         end || none()
       end
