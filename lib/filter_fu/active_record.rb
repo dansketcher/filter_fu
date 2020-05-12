@@ -24,7 +24,7 @@ module FilterFu
     module SingletonMethods
 
       def filtered_by(filter)
-        return memo.none() if !filter || filter.empty?
+        return none() if !filter || filter.empty?
 
         filter.inject(self) do |memo, (scope, arg)|
           scope = scope.to_sym
@@ -40,7 +40,7 @@ module FilterFu
       private
 
       def build_anonymous_scope(scope, arg)
-        return memo.none() unless column_names.include?(scope.to_s) && !arg.blank?
+        return none() unless column_names.include?(scope.to_s) && !arg.blank?
         where(scope => arg)
       end
 
