@@ -32,17 +32,13 @@ module FilterFu
           if memo.respond_to?(scope)
             memo.send(scope, arg)
           else
-            build_anonymous_scope(memo, scope, arg)
+            return none() unless column_names.include?(scope.to_s) && !arg.blank?
+            memo.where(scope, arg)
           end
         end || none()
       end
 
       private
-
-      def build_anonymous_scope(memo, scope, arg)
-        return none() unless column_names.include?(scope.to_s) && !arg.blank?
-        memo.where(scope, arg)
-      end
 
       def protected?(scope)
         if @filter_options.has_key?(:only)
