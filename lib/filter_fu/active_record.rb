@@ -24,7 +24,7 @@ module FilterFu
     module SingletonMethods
 
       def filtered_by(filter)
-        return scoped({}) if !filter || filter.empty?
+        return memo.none() if !filter || filter.empty?
 
         filter.inject(self) do |memo, (scope, arg)|
           scope = scope.to_sym
@@ -32,16 +32,16 @@ module FilterFu
           if memo.respond_to?(scope)
             memo.send(scope, arg)
           else
-            memo.scoped(build_anonymous_scope(scope, arg))
+            memo.send(build_anonymous_scope(scope, arg))
           end
-        end || scoped({})
+        end || none()
       end
 
       private
 
       def build_anonymous_scope(scope, arg)
-        return {} unless column_names.include?(scope.to_s) && !arg.blank?
-        { :conditions => { scope => arg } }
+        return memo.none() unless column_names.include?(scope.to_s) && !arg.blank?
+        where(scope => arg)
       end
 
       def protected?(scope)
