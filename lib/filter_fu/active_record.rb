@@ -26,7 +26,7 @@ module FilterFu
       def filtered_by(filter)
         return none() if !filter || filter.empty?
 
-        filter.inject(self) do |memo, (scope, arg)|
+        filter.to_unsafe_h.inject(self) do |memo, (scope, arg)|
           scope = scope.to_sym
           next if protected?(scope)
           if memo.respond_to?(scope)
