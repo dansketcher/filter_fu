@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = "filter_fu"
-  s.version       = "0.6.11"
+  s.version       = "1.0.0"
   s.platform      = Gem::Platform::RUBY
   s.authors       = ["Benedikt Deicke"]
   s.email         = ["benedikt@synatic.net"]
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.files         = Dir.glob('{lib,spec}/**/*') + %w(LICENSE README.rdoc Rakefile Gemfile Gemfile.lock .rspec)
 
-  s.add_runtime_dependency('rails', ['>= 3.0'])
+  s.add_runtime_dependency('rails', ['>= 5.0'])
   s.add_development_dependency('rspec', ['>= 2.0'])
   s.add_development_dependency('rspec-rails', ['>= 2.0'])
   s.add_development_dependency('webrat', ['>= 0.7.2'])
