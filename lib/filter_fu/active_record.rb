@@ -34,7 +34,7 @@ module FilterFu
           else
             scope_str = scope.to_s
             return memo.where('1=1') unless column_names.include?(scope_str) && !arg.blank?
-            memo.where(scope_str, arg)
+            memo.where(scope_str => arg)
           end
         end || where('1=1')
       end
