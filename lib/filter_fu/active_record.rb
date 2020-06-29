@@ -33,7 +33,7 @@ module FilterFu
             memo.send(scope, arg)
           else
             scope_str = scope.to_s
-            return where('1=1') unless column_names.include?(scope_str) && !arg.blank?
+            return memo.where('1=1') unless column_names.include?(scope_str) && !arg.blank?
             memo.where(scope_str, arg)
           end
         end || where('1=1')
