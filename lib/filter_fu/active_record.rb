@@ -24,7 +24,7 @@ module FilterFu
     module SingletonMethods
 
       def filtered_by(filter)
-        return none() if !filter || filter.empty?
+        return where('1=1') if !filter || filter.empty?
 
         filter.to_unsafe_h.inject(self) do |memo, (scope, arg)|
           scope = scope.to_sym
@@ -33,10 +33,10 @@ module FilterFu
             memo.send(scope, arg)
           else
             scope_str = scope.to_s
-            return none() unless column_names.include?(scope_str) && !arg.blank?
-            memo.where(scope_str, arg)
+            return memo.where('1=1') unless column_names.include?(scope_str) && !arg.blank?
+            memo.where(scope_str => arg)
           end
-        end || none()
+        end || where('1=1')
       end
 
       private
